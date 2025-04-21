@@ -2,15 +2,13 @@
 Rain-Free-Net is a deep learning-based image deraining model designed to remove rain streaks from images, improving visibility and clarity. The model uses Convolutional Neural Networks (CNNs) and achieves excellent results in real-time applications like autonomous driving and surveillance.
 
 ## Project Structure
-- **Train_Dataset/**: Contains the training images (if publicly available).
-- **Test_Dataset/**: Contains test images for evaluation.
-- **Outputs/**: Shows before-and-after images of derained results.
-- **Code/**: Contains the model training, testing, and evaluation scripts.
-
+- **Train_Dataset**: Contains **heavy rain images** used for training the model.
+- **Test_Dataset**: Contains **test images** used to evaluate the model’s performance.
+- **Outputs**: Contains the **before and after rain-free images**, showcasing the model’s results.
+- **Code**: Contains scripts for **training**, **testing**, and **evaluating** the model's performance.
 ## Installation
 To use this project, you'll need to install the following dependencies:
 - Python 
-- PyTorch
 - OpenCV
 - torch==1.5.0
 - torchvision==0.5.0
