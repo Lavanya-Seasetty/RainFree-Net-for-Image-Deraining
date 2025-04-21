@@ -20,4 +20,4 @@ def save_filenames(folder_path, txt_path):
 save_filenames(rain_dir, train_rain_txt)
 save_filenames(norain_dir, train_norain_txt)
 
-print("✅ test_rain.txt and test_norain.txt updated successfully!")
+print("test_rain.txt and test_norain.txt updated successfully!")
