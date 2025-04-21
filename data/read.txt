@@ -1,5 +1,5 @@
 The paths of rainy images are stored in train_rain.txt, and the corresponding clean (rain-free) images are listed in train_norain.txt for training dataset.
 
 In test dataset, the rainy images are all stored in test_rain.txt and the norain images are stored in test_norain.txt. 
-
+ 
 and same for validation dataset , the rainy images are stored in val_rain.txt and the norain images are stored in val_norain.txt by using the file_save.py file. 
