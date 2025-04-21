@@ -1,7 +1,7 @@
 import os 
 
 # Define directories
-data_dir = r"C:\Users\nandi\Downloads\DSDNet-main\DSDNet-main\data\Rain100H\test"
+data_dir = r"C:\Users\Downloads\data\Rain100H\val"
 rain_dir = os.path.join(data_dir, "rain")
 norain_dir = os.path.join(data_dir, "norain")
 
