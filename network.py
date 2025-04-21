@@ -23,29 +23,44 @@ def AtmLight(tensor):
     return atm
 
 
-def get_residual(ts):
-    max_channel = torch.max(ts, dim=1, keepdim=True)
-    min_channel = torch.min(ts, dim=1, keepdim=True)
-    res_channel = max_channel[0] - min_channel[0]
-    return res_channel
+def bilateral_filter_torch(input_tensor, d=9, sigma_color=75, sigma_space=75):
+    """
+    Applies OpenCV bilateral filter to a PyTorch tensor.
+    input_tensor: (B, C, H, W), float32, normalized [0, 1]
+    """
+    B, C, H, W = input_tensor.shape
+    output = []
 
+    # Process each image in the batch
+    for i in range(B):
+        img = input_tensor[i].permute(1, 2, 0).cpu().numpy()  # (H, W, C)
+        img_filtered = cv2.bilateralFilter(img.astype(np.float32), d=d,
+                                           sigmaColor=sigma_color,
+                                           sigmaSpace=sigma_space)
+        img_filtered = torch.from_numpy(img_filtered).permute(2, 0, 1)  # (C, H, W)
+        output.append(img_filtered)
+
+    output_tensor = torch.stack(output).to(input_tensor.device)
+    return output_tensor
 
 def decomposition(x, radius_list=None, eps_list=None):
     if radius_list is None:
-        radius_list = [30]
+        radius_list = [9]  # Bilateral filter 'd' parameter (neighborhood diameter)
     if eps_list is None:
-        eps_list = [1]
+        eps_list = [75]    # sigma_color for bilateral filtering
 
     LF_list = []
     HF_list = []
     res = get_residual(x)
-    res = res.repeat(1, 3, 1, 1)
+    res = res.repeat(1, 3, 1, 1)  # Make it 3 channels if it's grayscale
+
     for radius in radius_list:
         for eps in eps_list:
-            gf = GuidedFilter(radius, eps)
-            LF = gf(res, x)
+            # Bilateral filter: use 'res' as the guide (optional), but bilateralFilter doesn't directly support guide
+            LF = bilateral_filter_torch(x, d=radius, sigma_color=eps, sigma_space=radius)
             LF_list.append(LF)
             HF_list.append(x - LF)
+
     LF = torch.cat(LF_list, dim=1)
     HF = torch.cat(HF_list, dim=1)
     return LF, HF
