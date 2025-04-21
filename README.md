@@ -4,8 +4,9 @@ Rain-Free-Net is a deep learning-based image deraining model designed to remove 
 ## Project Structure
 - **Train_Dataset**: Contains **heavy rain images** used for training the model.
 - **Test_Dataset**: Contains **test images** used to evaluate the model’s performance.
-- **Outputs**: Contains the **before and after rain-free images**, showcasing the model’s results.
+- **Val Datset**:Contains **validation images** used during training to tune the model.
 - **Code**: Contains scripts for **training**, **testing**, and **evaluating** the model's performance.
+  
 ## Installation
 To use this project, you'll need to install the following dependencies:
 - Python 
@@ -25,8 +26,3 @@ To use this project, you'll need to install the following dependencies:
 3. Run the training script to train the model.
 4. Use the test script to evaluate the model and generate output images.
 
-## Example Outputs
-- Before Rain:
-  ![Before Rain](Outputs/before_rain_image_1.jpg)
-- After Rain-Free:
-  ![After Rain-Free](Outputs/after_rain_image_1.jpg)
